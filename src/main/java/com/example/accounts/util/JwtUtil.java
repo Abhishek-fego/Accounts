@@ -39,13 +39,20 @@ public class JwtUtil {
     }
 
     public Boolean validateToken(String token , UserDetails userDetails){
-        final String username = extractUserName(token);
+        final String header = extractUserName(token);
+        String[] tokens = header.split(" ");
+        String username = tokens[1];
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     public  String generateToken(UserDetails userDetails) throws Exception {
         Map<String,Object> claims = new HashMap<>();
         return createToken(claims,userDetails.getUsername());
+    }
+    public  String generateToken(UserDetails userDetails,String tenant_id) throws Exception {
+        Map<String,Object> claims = new HashMap<>();
+        String value = tenant_id+" "+userDetails.getUsername();
+        return createToken(claims,value);
     }
 
     private  String createToken(Map<String, Object> claims, String username) throws Exception {

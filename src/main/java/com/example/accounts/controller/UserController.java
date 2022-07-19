@@ -5,9 +5,6 @@ import com.example.accounts.dto.UserDto;
 import com.example.accounts.model.*;
 import com.example.accounts.service.UserService;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,12 +24,17 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public List<UserDto> getUsers(){
-        return userService.getUser();
+    public PageResponse getUsers(
+            @RequestParam(value = "pageNo",defaultValue = "0",required = false) int pageNo,
+            @RequestParam(value = "pageSize",defaultValue = "10",required = false) int pageSize,
+            @RequestParam(value = "sortBy",defaultValue = "id",required = false) String sortBy,
+            @RequestParam(value = "sortDir",defaultValue = "asc",required = false) String sortDir
+    ){
+        return userService.getPageUsers(pageNo,pageSize,sortBy,sortDir);
     }
 
     @PutMapping("/update/{id}")
-    public String updateUser(@RequestBody UserDto userDto,@PathVariable long id){
+    public String updateUser(@RequestBody UserDto userDto,@PathVariable long id ) throws Exception {
         return userService.updateUser(userDto,id);
     }
 

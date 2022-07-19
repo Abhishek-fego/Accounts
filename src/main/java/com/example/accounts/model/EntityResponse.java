@@ -13,11 +13,11 @@ public class EntityResponse {
         this.entity = entity;
     }
 
-    public String status = "SUCCESS";
+    public final String status = "SUCCESS";
 
-    public String message = "OK";
+    public final String message = "OK";
 
-    public String responseCode =  "200";
+    public final String responseCode = "200";
 
     public Entity getEntity() {
         return entity;
