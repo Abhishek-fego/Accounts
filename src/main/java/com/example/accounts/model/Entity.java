@@ -1,8 +1,17 @@
 package com.example.accounts.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Entity {
 
     public long numberOfAccounts;
@@ -11,36 +20,6 @@ public class Entity {
 
     List<AccountResponse> accounts;
 
-    public Entity() {
-    }
-
-    public Entity(long numberOfAccounts, BigDecimal aggregatedBalance, List<AccountResponse> accounts) {
-        this.numberOfAccounts = numberOfAccounts;
-        this.aggregatedBalance = aggregatedBalance;
-        this.accounts = accounts;
-    }
-
-    public long getNumberOfAccounts() {
-        return numberOfAccounts;
-    }
-
-    public void setNumberOfAccounts(long numberOfAccounts) {
-        this.numberOfAccounts = numberOfAccounts;
-    }
-
-    public BigDecimal getAggregatedBalance() {
-        return aggregatedBalance;
-    }
-
-    public void setAggregatedBalance(BigDecimal aggregatedBalance) {
-        this.aggregatedBalance = aggregatedBalance;
-    }
-
-    public List<AccountResponse> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<AccountResponse> accounts) {
-        this.accounts = accounts;
-    }
 }
+
+

@@ -1,5 +1,6 @@
 package com.example.accounts.filter;
 
+import com.example.accounts.tenant.TenantContext;
 import com.example.accounts.service.MyUserDetailsService;
 import com.example.accounts.util.JwtUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,7 +40,10 @@ public class JwtFilter extends OncePerRequestFilter {
         String username = null;
         if (authorizationHeader!=null && authorizationHeader.startsWith("Bearer ")){
             jwt = authorizationHeader.substring(7);
-            username = jwtUtil.extractUserName(jwt);
+            String token = jwtUtil.extractUserName(jwt);
+            String[] tokens = token.split(" ");
+            TenantContext.setCurrentTenant(tokens[0]);
+            username = tokens[1];
         }
 
         if (username!=null && SecurityContextHolder.getContext().getAuthentication() == null){
